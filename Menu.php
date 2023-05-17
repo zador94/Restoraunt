@@ -12,7 +12,7 @@ class Menu
     public function removeListDish(string $name) : void
     {
         foreach ($this->listDish as $key=>$value) {
-            if($value->getName() == $name) {
+            if ($value->getName() == $name) {
                 unset($this->listDish[$key]);
             }
         }

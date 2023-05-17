@@ -1,15 +1,23 @@
 <?php
 
-abstract class Waiter
+class Waiter
 {
-    public static function newOrder(): Waiter
+    public function getOrder()
     {
-        return new static;
+        return Order::getInstance();
+    }
+    public function setListDish(Order $order, Dish $dish): void
+    {
+        $order->setListDish($dish);
     }
 
-    public function setListDish(Dish $dish): void
+    public function getInfoOrder(Order $order): void
     {
-
+        $order->infoOrder();
     }
 
+    public function statusOrderPrepare(Order $order): void
+    {
+        $order->setOrderStatus('готовится');
+    }
 }

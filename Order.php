@@ -1,5 +1,5 @@
 <?php
-class Order extends Waiter
+class Order
 {
     private static $instance;
     private array $listDish;
@@ -11,8 +11,7 @@ class Order extends Waiter
     }
     public static function getInstance()
     {
-        if(static::$instance == null)
-        {
+        if (static::$instance == null) {
             static::$instance = new Order(111111);
         }
         return static::$instance;
@@ -58,7 +57,7 @@ class Order extends Waiter
         $this->orderStatus = $orderStatus;
     }
 
-    private function calculationTotalOrderValue()
+    private function calculationTotalOrderValue(): float
     {
         foreach ($this->listDish as $listDish) {
             $this->totalOrderValue += $listDish->getPrice();
@@ -66,9 +65,10 @@ class Order extends Waiter
         return $this->totalOrderValue;
     }
 
-    public function infoOrder($listDish)
+    public function infoOrder(): void
     {
         echo 'Номер заказа' . $this->numberOrder . '<br>';
+        echo 'Статус заказа: ' . $this->getOrderStatus() . '<br>';
         echo 'Список блюд: <br>';
             foreach ($this->listDish as $dish)
             {
