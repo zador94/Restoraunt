@@ -67,8 +67,8 @@ class Order
 
     public function infoOrder(): void
     {
-        echo 'Номер заказа' . $this->numberOrder . '<br>';
-        echo 'Статус заказа: ' . $this->getOrderStatus() . '<br>';
+        echo 'Номер заказа: ' . $this->numberOrder . '<br>';
+        echo 'Статус заказа: ' . $this->getOrderStatus() . '<br><br>';
         echo 'Список блюд: <br>';
             foreach ($this->listDish as $dish)
             {
