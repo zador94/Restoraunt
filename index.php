@@ -10,18 +10,7 @@ $menu->addListDish($dish2);
 $menu->addListDish($dish3);
 $menu->addListDish($dish4);
 
-
-try {
-    $menu->removeListDish('aaa');
-} catch (NameException $e) {
-    echo $e;
-}
-
-var_dump($menu);
-
-
-
-/*$waiter = new Waiter();
+$waiter = new Waiter();
 $order = $waiter->getOrder();
 $waiter->setListDish($order, $dish1);
 $waiter->setListDish($order, $dish2);
@@ -32,7 +21,7 @@ $waiter->statusOrderPrepare($order);
 $kitchen = new Kitchen();
 $kitchen->statusDishComplete($order);
 
-$waiter->getInfoOrder($order);*/
+$waiter->getInfoOrder($order);
 
 
 
