@@ -6,9 +6,9 @@ class Waiter
     {
         return Order::getInstance();
     }
-    public function setListDish(Order $order, Dish $dish): void
+    public function setListDish(Order $order, Menu $menu, string $name): void
     {
-        $order->setListDish($dish);
+        $order->setListDish($menu, $name);
     }
 
     public function getInfoOrder(Order $order): void

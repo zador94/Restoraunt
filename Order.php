@@ -1,18 +1,27 @@
 <?php
+
+
+//TODO
+// сделать инкремент номера заказа
+
+
 class Order
 {
     private static $instance;
     private array $listDish;
-    private float $totalOrderValue = 0;
+    private float $totalOrderValue;
     private string $orderStatus = 'новый';
+    public int $numberOrder = 1;
 
-    private function __construct(private int $numberOrder)
+    private function __construct()
     {
+        $this->numberOrder += 1;
     }
+
     public static function getInstance()
     {
         if (static::$instance == null) {
-            static::$instance = new Order(111111);
+            static::$instance = new Order();
         }
         return static::$instance;
     }
@@ -20,6 +29,12 @@ class Order
     public function getNumberOrder(): int
     {
         return $this->numberOrder;
+    }
+
+    public function __clone()
+    {
+        $this->numberOrder += 1;
+        $this->Order = clone $this->Order;
     }
 
     public function setNumberOrder(int $numberOrder): void
@@ -32,14 +47,14 @@ class Order
         return $this->listDish;
     }
 
-    public function setListDish(Dish $dish): void
+   public function setListDish(Menu $menu, string $name): void
     {
-        $this->listDish[] = $dish;
-    }
-
-    public function getTotalOrderValue(): float
-    {
-        return $this->totalOrderValue;
+        for ($i = 0; $i < count($menu->getListDish()); $i++)
+        {
+            if ($menu->getListDish()[$i]->getName() == $name) {
+                $this->listDish[] = $menu->getListDish()[$i];
+            }
+        }
     }
 
     public function setTotalOrderValue(float $totalOrderValue): void
@@ -65,6 +80,19 @@ class Order
         return $this->totalOrderValue;
     }
 
+    public function deleteListOrder(string $name)
+    {
+        foreach ($this->listDish as $key=>$value) {
+            if ($value->getName() == $name) {
+                unset($this->listDish[$key]);
+                break;
+            }
+        }
+        if ($value->getName() != $name || $name == '') {
+            throw new NameException('Неправильное название блюда');
+        }
+    }
+
     public function infoOrder(): void
     {
         echo 'Номер заказа: ' . $this->numberOrder . '<br>';
@@ -77,5 +105,11 @@ class Order
             }
         echo 'Общая сумма заказа: ' . $this->calculationTotalOrderValue();
     }
+
+    /**
+     * @return int
+     */
+
+
 
 }

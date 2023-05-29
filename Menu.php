@@ -17,7 +17,7 @@ class Menu
                 break;
             }
         }
-            if ($value->getName() != $name || $name == ' ') {
+            if ($value->getName() != $name || $name == '') {
                 throw new NameException('Неправильное название блюда');
             }
     }
