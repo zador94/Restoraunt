@@ -26,13 +26,19 @@ $kitchen->statusDishComplete($order);*/
 
 
 $order = Order::getInstance();
-$order1 = Order::getInstance();
-$order2 = Order::getInstance();
-
-
 echo $order->getnumberOrder();
-echo $order1->getnumberOrder();
-echo $order2->getnumberOrder();
+$order2 = unserialize(serialize($order));
+echo $order2->getNumberOrder();
+$order3 = unserialize(serialize($order2));
+echo $order3->getNumberOrder();
+
+
+
+
+
+
+
+
 
 
 

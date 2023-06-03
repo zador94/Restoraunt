@@ -7,23 +7,24 @@
 
 class Order
 {
-    private static $instance;
+    private static $lastNumberOrder = 1;
+    private static ?Order $instance = null;
     private array $listDish;
     private float $totalOrderValue;
     private string $orderStatus = 'новый';
-    public int $numberOrder = 1;
+    private int $numberOrder;
 
     private function __construct()
     {
-        $this->numberOrder += 1;
+        $this->numberOrder = self::$lastNumberOrder++;
     }
 
-    public static function getInstance()
+    public static function getInstance(): ?Order
     {
-        if (static::$instance == null) {
-            static::$instance = new Order();
+        if (self::$instance === null) {
+            self::$instance = new self();
         }
-        return static::$instance;
+        return self::$instance;
     }
 
     public function getNumberOrder(): int
@@ -31,10 +32,9 @@ class Order
         return $this->numberOrder;
     }
 
-    public function __clone()
+    public function __wakeup()
     {
-        $this->numberOrder += 1;
-        $this->Order = clone $this->Order;
+        $this->numberOrder = self::$lastNumberOrder++;
     }
 
     public function setNumberOrder(int $numberOrder): void
@@ -106,9 +106,6 @@ class Order
         echo 'Общая сумма заказа: ' . $this->calculationTotalOrderValue();
     }
 
-    /**
-     * @return int
-     */
 
 
 
