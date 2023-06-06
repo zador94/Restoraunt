@@ -32,7 +32,7 @@ class Order
         return $this->numberOrder;
     }
 
-    public function __wakeup()
+    public function __clone()
     {
         $this->numberOrder = self::$lastNumberOrder++;
     }
